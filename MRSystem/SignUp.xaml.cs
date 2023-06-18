@@ -52,7 +52,50 @@ namespace MRSystem
 
         private void btnSignup_Click(object sender, RoutedEventArgs e)
         {
-           
+            if (tboxUsername.Text.Length < 3)
+            {
+                MessageBox.Show("Login is too short! At least 3 characters.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                if (policy.IsValid(boxPassword.Password))
+                {
+                    string connectionString = @"Data Source=localhost;Initial Catalog=library;Integrated Security=True";
+                    using (MRlibContext db = new MrContext(connectionString))
+                    {
+                        var query = from u in db.Admins where u.Username == tboxUsername.Text select u;
+                        if (query.Count() > 0)
+                        {
+                            MessageBox.Show("Login already in use!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            if (boxPassword.Password != boxPassword2.Password)
+                            {
+                                MessageBox.Show("Passwords are different!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            else
+                            {
+                                var pass = GetHashString(boxPassword.Password);
+
+                                db.Add(new Admin
+                                {
+                                    Username = tboxUsername.Text,
+                                    Password = pass
+                                });
+                                db.SaveChanges();
+                                MessageBox.Show("Sign up successful!", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    MessageBox.Show("Password is too weak! Check our password policy.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+            }
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

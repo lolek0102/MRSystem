@@ -5,11 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.SqlServer;
 
 namespace MRSystem
 {
-    public class MRlibContext : DbContext
+    public class MRdbContext : DbContext
     {
         public DbSet<Admin> Admins { get; set; } = null!;
         public DbSet<Movie> Movies { get; set; } = null!;
@@ -18,7 +17,7 @@ namespace MRSystem
 
         public string ConnectionString { get; }
 
-        public MRlibContext(string connectionString)
+        public MRdbContext(string connectionString)
         {
             this.ConnectionString = connectionString;
         }
