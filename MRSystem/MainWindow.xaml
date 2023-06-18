@@ -9,6 +9,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
+        MouseDown="Window_MouseDown"
         AllowsTransparency="True"
         ResizeMode="NoResize">
     <Grid>

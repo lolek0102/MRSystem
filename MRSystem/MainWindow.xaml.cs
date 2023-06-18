@@ -25,11 +25,6 @@ namespace MRSystem
             InitializeComponent();
         }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-            this.DragMove();
-        }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -44,6 +39,12 @@ namespace MRSystem
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
     }
 }
