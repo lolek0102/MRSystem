@@ -60,7 +60,7 @@ namespace MRSystem
             {
                 if (policy.IsValid(boxPassword.Password))
                 {
-                    string connectionString = @"Data Source=localhost;Initial Catalog=library;Integrated Security=True";
+                    string connectionString = @"Data Source=localhost;Initial Catalog=movie_rental;Integrated Security=True;TrustServerCertificate=true";
                     using (MRdbContext db = new MRdbContext(connectionString))
                     {
                         var query = from u in db.Admins where u.Username == tboxUsername.Text select u;
