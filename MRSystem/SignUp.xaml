@@ -1,0 +1,25 @@
+﻿<Window x:Class="MRSystem.SignUp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MRSystem"
+        mc:Ignorable="d"
+        Title="Signup" Height="700" Width="450"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        MouseDown="Window_MouseDown"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Border CornerRadius="20" BorderBrush="Black" BorderThickness="5" Padding="6" Background="Black">
+        <StackPanel Background="DarkGray">
+            <Button Name="BtnClose" Padding="1" FontSize="20" Width="25" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0" Click="BtnClose_Click">
+                <Image Source="C:\Users\DELL\source\repos\MRSystem\MRSystem\Images\exit2.png"></Image>
+            </Button>
+            <Image Margin="0 2 0 25" Width="180px" Height="180px" Source="C:\Users\DELL\source\repos\MRSystem\MRSystem\Images\signup.jpg"/>
+            <TextBlock HorizontalAlignment="Center" FontSize="26" FontWeight="DemiBold" FontStyle="Italic" Foreground="DarkSlateGray">Sign up</TextBlock>
+            <Border Margin="0 10" BorderThickness="1" BorderBrush="DarkSlateGray"></Border>
+        </StackPanel>
+    </Border>
+</Window>
