@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Security.Cryptography;
+using MRSystem.Models;
 
 namespace MRSystem
 {
@@ -19,6 +21,19 @@ namespace MRSystem
     /// </summary>
     public partial class SignUp : Window
     {
+        public static byte[] GetHash(string inputString)
+        {
+            using (HashAlgorithm algorithm = SHA256.Create())
+                return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
+        }
+        public static string GetHashString(string inputString)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in GetHash(inputString))
+                sb.Append(b.ToString("X2"));
+
+            return sb.ToString();
+        }
         public SignUp()
         {
             InitializeComponent();
@@ -37,7 +52,7 @@ namespace MRSystem
 
         private void btnSignup_Click(object sender, RoutedEventArgs e)
         {
-
+           
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
