@@ -34,5 +34,17 @@ namespace MRSystem
         {
             this.Close();
         }
+
+        private void btnSignup_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            MainWindow mw = new MainWindow();
+            mw.Show();
+        }
     }
 }
