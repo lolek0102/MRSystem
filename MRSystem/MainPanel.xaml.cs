@@ -44,12 +44,14 @@ namespace MRSystem
 
         private void borrowBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            BorrowWindow bw = new BorrowWindow();
+            bw.Show();
         }
 
         private void returnBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            ReturnWindow rw = new ReturnWindow();
+            rw.Show();
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)

@@ -29,7 +29,7 @@
 
             </Grid>
             <Border Margin="0 10" BorderThickness="1" BorderBrush="DarkSlateGray"></Border>
-            <DataGrid Name="dgMovieView" Width="500" Height="300">
+            <DataGrid Name="dgMovieView" Width="550" Height="300">
             </DataGrid>
             <Border Margin="0 10" BorderThickness="1" BorderBrush="DarkSlateGray"></Border>
         </StackPanel>
