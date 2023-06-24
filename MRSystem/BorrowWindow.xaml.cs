@@ -68,12 +68,54 @@ namespace MRSystem
 
         private void btnBorrow_Click(object sender, RoutedEventArgs e)
         {
+            if (tbFirst.Text == "")
+            {
+                MessageBox.Show("Enter the user's data!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (tbTitle.Text == "")
+            {
+                MessageBox.Show("Enter the movie's title!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (tbDate.Text == "")
+            {
+                MessageBox.Show("Enter the date!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
 
+                using (MRdbContext db = new MRdbContext(connectionString))
+                {
+                    var moviecheck = from u in db.Movies where u.Title == tbTitle.Text select u;
+                    var ctmcheck = from st in db.Customers where st.UserCardNumber == tboxFindCard.Text select st;
+                    var ctmborr = ctmcheck.First();
+                    if (moviecheck.Count() > 0)
+                    {
+                        var movieborr = moviecheck.First();
+                        DateTime? rtn = null;
+                        db.Add(new Borrow
+                        {
+                            MovieId = movieborr.Id,
+                            CustomerId = ctmborr.Id,
+                            UserCardNumber = Convert.ToInt32(ctmborr.UserCardNumber),
+                            MovieTitle = movieborr.Title,
+                            MovieLend = (DateTime)tbDate.SelectedDate,
+                            MovieReturn = rtn
+
+                        });
+                        db.SaveChanges();
+                        MessageBox.Show("Movie successfully borrowed!", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("There is no such movie in movie's database!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
         }
 
         private void tbDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            SelectedDateTextBox.Text = tbDate.SelectedDate.ToString();
         }
     }
 }
