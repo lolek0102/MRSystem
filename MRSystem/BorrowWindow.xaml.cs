@@ -39,5 +39,15 @@ namespace MRSystem
         {
 
         }
+
+        private void btnBorrow_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tbDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
