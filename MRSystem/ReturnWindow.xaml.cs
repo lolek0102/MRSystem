@@ -49,7 +49,7 @@ namespace MRSystem
                     Customer customer = db.Customers.Where(u => u.UserCardNumber == tboxCardNumber.Text).First();
                     tbFirst.Text = customer.FirstName;
                     tbLast.Text = customer.LastName;
-                    
+                    BindCombo();
                 }
                 else
                 {
@@ -63,7 +63,20 @@ namespace MRSystem
             }
         }
 
-       
+        private void BindCombo()
+        {
+            using (MRdbContext db = new MRdbContext(connectionString))
+            {
+                var query = from rt in db.Borrows where rt.UserCardNumber == Convert.ToInt32(tboxCardNumber.Text) && rt.MovieReturn == null select rt.MovieTitle;
+                var listrt = query.ToList();
+                for (int i = 0; i < listrt.Count; i++)
+                {
+                    cbRent.Items.Add(listrt[i]);
+                }
+
+            }
+
+        }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
