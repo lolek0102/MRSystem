@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MRSystem.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,8 @@ namespace MRSystem
     /// </summary>
     public partial class ReturnWindow : Window
     {
+        string connectionString = @"Data Source=localhost;Initial Catalog=movie_rental;Integrated Security=True;TrustServerCertificate=true";
+
         public ReturnWindow()
         {
             InitializeComponent();
@@ -37,12 +40,34 @@ namespace MRSystem
 
         private void FindCardNumber_Click(object sender, RoutedEventArgs e)
         {
+            using (MRdbContext db = new MRdbContext(connectionString))
+            {
+                var query = from u in db.Customers where u.UserCardNumber == tboxCardNumber.Text select u;
+                if (query.Count() > 0)
+                {
+                    cbRent.Items.Clear();
+                    Customer customer = db.Customers.Where(u => u.UserCardNumber == tboxCardNumber.Text).First();
+                    tbFirst.Text = customer.FirstName;
+                    tbLast.Text = customer.LastName;
+                    
+                }
+                else
+                {
+                    MessageBox.Show("There is no user with such card number!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    tbFirst.Text = "";
+                    tbLast.Text = "";
+                    cbRent.Items.Clear();
+                }
 
+
+            }
         }
+
+       
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
