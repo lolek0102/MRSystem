@@ -85,7 +85,24 @@ namespace MRSystem
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
+            if (cbRent.Text != "")
+            {
+                using (MRdbContext db = new MRdbContext(connectionString))
+                {
+                    Borrow borrow = db.Borrows.Where(u => u.MovieTitle == cbRent.Text && u.UserCardNumber == Convert.ToInt32(tboxCardNumber.Text)).First();
+                    borrow.MovieReturn = DateTime.Now;
+                    db.SaveChanges();
+                    MessageBox.Show("Movie returned successfuly!", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
+                    cbRent.Items.Clear();
+                    BindCombo();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Choose movie to return!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
     }
-}
+    }
+
